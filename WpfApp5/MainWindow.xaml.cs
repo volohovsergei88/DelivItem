@@ -21,7 +21,7 @@ namespace WpfApp5
     /// </summary>
     public partial class MainWindow : Window
     {
-      
+
         public MainWindow()
         {
             InitializeComponent();
@@ -106,7 +106,7 @@ namespace WpfApp5
                                     timeAllMenuItem.Header = timeAll;
                                     timeAllMenuItem.Click += (s, ev) =>
                                     {
-                                        HandleMenuItemClick(s,ev);
+                                        HandleMenuItemClick(s, ev);
                                         //MenuItem selectedItem = (MenuItem)s;
                                         //List<string> parents = new List<string>();
                                         //GetParents(selectedItem, parents);
@@ -140,11 +140,13 @@ namespace WpfApp5
 
         private void HandleMenuItemClick(object sender, RoutedEventArgs e)
         {
+            DeliveriesViewModel vm = (DeliveriesViewModel)FindResource("dlvVM");
             MenuItem selectedItem = (MenuItem)sender;
             List<string> parents = new List<string>();
             GetParents(selectedItem, parents);
             VolumeDelivery volumeDelivery = new VolumeDelivery();
-            volumeDelivery.AddItem(parents);
+            vm.AddDelivery.Execute(new DeliveryItem(string.Join(", ", parents)));
+            //volumeDelivery.AddItem(parents);
             //DeliveryItem volumeDelivery = new DeliveryItem();
             //volumeDelivery.AddItem(parents);
         }

@@ -24,31 +24,31 @@ namespace WpfApp5
     /// </summary>
     public partial class VolumeDelivery : UserControl
     {
-        public ObservableCollection<DeliveryItem> deliveryItems { get; set; } /*= new ObservableCollection<DeliveryItem>();*/
+        //public ObservableCollection<DeliveryItem> deliveryItems { get; set; } /*= new ObservableCollection<DeliveryItem>();*/
       
      
         public VolumeDelivery()
         {
             InitializeComponent();
             // DataContext = new DeliveryItem();
-           DataContext = this;
-            deliveryItems = new ObservableCollection<DeliveryItem>();
-            Del.ItemsSource = deliveryItems;
+           //DataContext = this;
+           // deliveryItems = new ObservableCollection<DeliveryItem>();
+           // Del.ItemsSource = deliveryItems;
           
         }
-        public void AddItem(List<string> items)
-        {
-            items.Reverse();
-            string concatenatedItems = string.Join(", ", items.ToArray());
-            deliveryItems.Add(new DeliveryItem(concatenatedItems));
+        //public void AddItem(List<string> items)
+        //{
+        //    items.Reverse();
+        //    string concatenatedItems = string.Join(", ", items.ToArray());
+        //    deliveryItems.Add(new DeliveryItem(concatenatedItems));
          
           
 
-            //foreach (var item in items)
-            //{
-            //    deliveryItems.Add(new DeliveryItem(item));
-            //}
+        //    //foreach (var item in items)
+        //    //{
+        //    //    deliveryItems.Add(new DeliveryItem(item));
+        //    //}
 
-        }
+        //}
     }
 }
