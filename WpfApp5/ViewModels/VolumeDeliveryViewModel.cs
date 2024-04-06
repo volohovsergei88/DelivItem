@@ -11,8 +11,8 @@ namespace WpfApp5.ViewModels
 {
     public class VolumeDeliveryViewModel:INotifyPropertyChanged
     {
-        private ObservableCollection<DeliveryItem> _delivery;
-        public ObservableCollection<DeliveryItem> Delivery
+        private ObservableCollection<Delivery> _delivery;
+        public ObservableCollection<Delivery> Delivery
         {
             get { return _delivery; }
             set
@@ -23,7 +23,7 @@ namespace WpfApp5.ViewModels
         }
         public VolumeDeliveryViewModel()
         {
-            Delivery = new ObservableCollection<DeliveryItem>();
+            Delivery = new ObservableCollection<Delivery>();
             
 
         }
@@ -31,7 +31,7 @@ namespace WpfApp5.ViewModels
         {
             items.Reverse();
             string concatenatedItems = string.Join(", ", items.ToArray());
-            Delivery.Add(new DeliveryItem(concatenatedItems));
+            Delivery.Add(new Delivery(concatenatedItems));
         }
 
         public event PropertyChangedEventHandler PropertyChanged;

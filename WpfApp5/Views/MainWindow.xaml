@@ -6,19 +6,38 @@
         xmlns:local="clr-namespace:WpfApp5"
         xmlns:vm="clr-namespace:WpfApp5.ViewModels"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
-    <Window.DataContext>
+        Title="MainWindow" Height="450" Width="800"
+        DataContext="{DynamicResource vm}">
+    <!--<Window.DataContext>
         <vm:VolumeDeliveryViewModel />
-    </Window.DataContext>
+    </Window.DataContext>-->
     <Grid >
         <Grid.RowDefinitions >
             <RowDefinition Height="35"/>
             <RowDefinition Height="50"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
-        <Button x:Name="MyButton" Grid.Row="0" Content="Кнопка" Width="100" Height="25" HorizontalAlignment="Left" Margin="5"
-  VerticalAlignment="Center"
-      MouseRightButtonDown ="ContextMenuDel"/>
+        <Button x:Name="MyButton" Grid.Row="0" Content="Кнопка"
+                Width="100" Height="25"
+                HorizontalAlignment="Left" Margin="5" VerticalAlignment="Center">
+            <FrameworkElement.ContextMenu>
+                <ContextMenu ItemsSource="{Binding MainDelivery}">
+                    <ContextMenu.Resources>
+                        <Style TargetType="MenuItem">
+                            <Setter Property="Command" Value="{Binding SelectDelivery, Source={StaticResource vm}}"/>
+                            <Setter Property="CommandParameter" Value="{Binding}"/>
+                        </Style>
+                    </ContextMenu.Resources>
+                    <ContextMenu.ItemTemplate>
+                        <HierarchicalDataTemplate DataType="{x:Type local:Delivery}"
+                                                  ItemsSource="{Binding Children}">
+                            <TextBlock Text="{Binding Namedelivery}"/>
+                        </HierarchicalDataTemplate>
+                    </ContextMenu.ItemTemplate>
+                </ContextMenu>
+            </FrameworkElement.ContextMenu>
+        </Button>
+      <!--MouseRightButtonDown ="ContextMenuDel"/>-->
        
         <!--<ItemsControl Grid.Row="1" Grid.Column="0" x:Name="Del" ItemsSource="{Binding  Delivery  }">
             <ItemsControl.ItemTemplate>
@@ -31,6 +50,6 @@
                 </DataTemplate>
             </ItemsControl.ItemTemplate>
         </ItemsControl>-->
-        <local:VolumeDelivery x:Name="G2" Grid.Row="1"/>
+        <local:VolumeDelivery Grid.Row="1" DataContext="{Binding SelectedDelivery, Source={StaticResource vm}}"/>
     </Grid>
 </Window>

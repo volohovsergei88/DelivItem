@@ -26,8 +26,8 @@ namespace WpfApp5
         public MainWindow()
         {
             InitializeComponent();
-            viewModel = new VolumeDeliveryViewModel();
-            DataContext = viewModel;
+            //viewModel = new VolumeDeliveryViewModel();
+            //DataContext = viewModel;
             //G2.DataContext= viewModel;
         }
 
