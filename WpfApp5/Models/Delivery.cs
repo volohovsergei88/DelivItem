@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Collections.Specialized;
 using System.ComponentModel;
-using System.Windows.Controls;
+using System.Threading.Tasks;
 using Wpf;
 
 namespace WpfApp5
@@ -17,18 +17,27 @@ namespace WpfApp5
             PropertyChanged += OnDeliveryChanged;
         }
 
-        private void OnDeliveryChanged(object sender, PropertyChangedEventArgs e)
+        private async void OnDeliveryChanged(object sender, PropertyChangedEventArgs e)
         {
             if (e.PropertyName is nameof(Parent))
             {
-                foreach (Delivery item in Children)
+                RaisePropertyChanged(PathChangedEventArgs);
+                await Task.Delay(5);
+                Queue<Delivery> queue = new Queue<Delivery>();
+                queue.Enqueue(this);
+                while (queue.Count > 0)
                 {
-                    item.RaisePropertyChanged(ParentChangedEventArgs);
+                    Delivery curr = queue.Dequeue();
+                    foreach (Delivery item in curr.Children)
+                    {
+                        item.RaisePropertyChanged(PathChangedEventArgs);
+                        queue.Enqueue(item);
+                    }
                 }
             }
         }
 
-        private static readonly PropertyChangedEventArgs ParentChangedEventArgs = new PropertyChangedEventArgs(nameof(Parent));
+        private static readonly PropertyChangedEventArgs PathChangedEventArgs = new PropertyChangedEventArgs(nameof(Path));
 
         private void OnChildrenChanged(object sender, NotifyCollectionChangedEventArgs e)
         {
@@ -169,7 +178,7 @@ namespace WpfApp5
 
         }
 
-        public Delivery SelectedDelivery {  get => Get<Delivery>(); set => Set(value); }
+        public Delivery SelectedDelivery { get => Get<Delivery>(); set => Set(value); }
 
         public RelayCommand SelectDelivery => GetCommand<Delivery>(dlv => SelectedDelivery = dlv);
     }
