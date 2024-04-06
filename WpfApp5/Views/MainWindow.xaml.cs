@@ -13,6 +13,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using WpfApp5.ViewModels;
 
 namespace WpfApp5
 {
@@ -21,10 +22,13 @@ namespace WpfApp5
     /// </summary>
     public partial class MainWindow : Window
     {
-      
+        private VolumeDeliveryViewModel viewModel;
         public MainWindow()
         {
             InitializeComponent();
+            viewModel = new VolumeDeliveryViewModel();
+            DataContext = viewModel;
+            //G2.DataContext= viewModel;
         }
 
         string[] levelClaster = { "Поставка ПО", "Обучение", "Моделирование" };
@@ -143,8 +147,11 @@ namespace WpfApp5
             MenuItem selectedItem = (MenuItem)sender;
             List<string> parents = new List<string>();
             GetParents(selectedItem, parents);
-            VolumeDelivery volumeDelivery = new VolumeDelivery();
-            volumeDelivery.AddItem(parents);
+
+            viewModel.AddItem(parents);
+            //VolumeDeliveryViewModel viewModel = new VolumeDeliveryViewModel();
+            //VolumeDelivery volumeDelivery = new VolumeDelivery();
+            //volumeDelivery.AddItem(parents);
             //DeliveryItem volumeDelivery = new DeliveryItem();
             //volumeDelivery.AddItem(parents);
         }

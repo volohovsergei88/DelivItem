@@ -12,23 +12,16 @@ namespace WpfApp5
     public class DeliveryItem : INotifyPropertyChanged
     {
         private string _namedelivery;
-        //public DeliveryItem()
-        //{
 
-        //}
-        public DeliveryItem()
-        {
-                
-        }
+
         public DeliveryItem(string _namedelivery)
         {
             // DeliveryItems = new ObservableCollection<DeliveryItem>(); // Инициализация DeliveryItems
-           
-            Namedelivery= _namedelivery;
+
+            Namedelivery = _namedelivery;
         }
 
-        //public ObservableCollection<DeliveryItem> DeliveryItems { get; set; }
-        //public ObservableCollection<DeliveryItem> DeliveryItems { get; } = new ObservableCollection<DeliveryItem>();
+
 
         public event PropertyChangedEventHandler PropertyChanged;
 
