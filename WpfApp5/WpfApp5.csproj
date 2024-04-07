@@ -55,8 +55,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="Models\DeliveryItem.cs" />
-    <Compile Include="ViewModels\VolumeDeliveryViewModel.cs" />
+    <Compile Include="ViewModels\DeliveriesViewModel.cs" />
+    <Compile Include="Dto\Delivery.cs" />
+    <Compile Include="Views\DeliveriesViewSource.cs" />
+    <Compile Include="Views\DeliveryToPathConverter.cs" />
     <Compile Include="Views\VolumeDelivery.xaml.cs">
       <DependentUpon>VolumeDelivery.xaml</DependentUpon>
     </Compile>
@@ -103,6 +105,11 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <ProjectReference Include="..\Common\Common.csproj">
+      <Project>{E30FC9E8-23DA-405D-8B9E-6892B61DC389}</Project>
+      <Name>Common</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

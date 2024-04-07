@@ -4,33 +4,42 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WpfApp5"
-        xmlns:vm="clr-namespace:WpfApp5.ViewModels"
+        xmlns:vm="clr-namespace:ViewModels"
+        xmlns:dto="clr-namespace:Dto"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
-    <Window.DataContext>
-        <vm:VolumeDeliveryViewModel />
-    </Window.DataContext>
+        Title="MainWindow" Height="450" Width="800"
+        DataContext="{DynamicResource vm}">
+    <Window.Resources>
+        <local:DeliveriesViewSource x:Key="deliveries"
+                                    DeliveryId="0"
+                                    Source="{Binding Deliveries, Mode=OneWay}"/>
+    </Window.Resources>
     <Grid >
         <Grid.RowDefinitions >
             <RowDefinition Height="35"/>
-            <RowDefinition Height="50"/>
+            <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
         <Button x:Name="MyButton" Grid.Row="0" Content="Кнопка" Width="100" Height="25" HorizontalAlignment="Left" Margin="5"
-  VerticalAlignment="Center"
-      MouseRightButtonDown ="ContextMenuDel"/>
-       
-        <!--<ItemsControl Grid.Row="1" Grid.Column="0" x:Name="Del" ItemsSource="{Binding  Delivery  }">
-            <ItemsControl.ItemTemplate>
-                <DataTemplate>
-                    <Grid>
+                VerticalAlignment="Center">
+            <FrameworkElement.ContextMenu>
+                <ContextMenu ItemsSource="{Binding Source={StaticResource deliveries}}">
+                    <ContextMenu.Resources>
+                        <Style TargetType="MenuItem">
+                            <Setter Property="Command" Value="{Binding SelectDelivery, Source={StaticResource vm}}"/>
+                            <Setter Property="CommandParameter" Value="{Binding}"/>
+                            <Setter Property="local:DeliveriesViewSource.DeliveriesSource" Value="{Binding Deliveries, Source={StaticResource vm}}"/>
+                        </Style>
+                    </ContextMenu.Resources>
+                    <ContextMenu.ItemTemplate>
+                        <HierarchicalDataTemplate DataType="{x:Type dto:Delivery}">
+                            <TextBlock Text="{Binding NameDelivery}"/>
+                        </HierarchicalDataTemplate>
+                    </ContextMenu.ItemTemplate>
+                </ContextMenu>
+            </FrameworkElement.ContextMenu>
+        </Button>
 
-                        <TextBlock Text="{Binding  Namedelivery}" Margin="10,2"
-                       HorizontalAlignment="Left" TextWrapping="Wrap" />
-                    </Grid>
-                </DataTemplate>
-            </ItemsControl.ItemTemplate>
-        </ItemsControl>-->
-        <local:VolumeDelivery x:Name="G2" Grid.Row="1"/>
+        <local:VolumeDelivery Grid.Row="1"/>
     </Grid>
 </Window>

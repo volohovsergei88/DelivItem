@@ -2,8 +2,10 @@
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:local="clr-namespace:WpfApp5"
-             StartupUri="Views/MainWindow.xaml">
+             xmlns:vm="clr-namespace:ViewModels"
+             StartupUri="Views/MainWindow.xaml" Startup="OnStartup">
     <Application.Resources>
-         
+        <vm:DeliveriesViewModel x:Key="vm"/>
+        <local:DeliveryToPathConverter x:Key="deliveryToPath"/>
     </Application.Resources>
 </Application>

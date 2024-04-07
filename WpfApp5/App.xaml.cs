@@ -1,10 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Configuration;
-using System.Data;
-using System.Linq;
-using System.Threading.Tasks;
-using System.Windows;
+﻿using System.Windows;
+using ViewModels;
 
 namespace WpfApp5
 {
@@ -13,5 +8,13 @@ namespace WpfApp5
     /// </summary>
     public partial class App : Application
     {
+        private void OnStartup(object sender, StartupEventArgs e)
+        {
+            //< vm:DeliveriesViewModel x:Key = "vm" />
+            //< local:DeliveryToPathConverter x:Key = "deliveryToPath" />
+            DeliveriesViewModel vm = (DeliveriesViewModel)FindResource("vm");
+            DeliveryToPathConverter deliveryToPath = (DeliveryToPathConverter)FindResource("deliveryToPath");
+            deliveryToPath.Deliveries = vm.Deliveries;
+        }
     }
 }
